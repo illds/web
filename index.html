@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lab 1</title>
+    <style>
+    body {
+        margin: 0;
+        display: grid;
+        background: whitesmoke;
+        /*background: url("pics/back.jpg") no-repeat;*/
+        /*background-size: 100%;*/
+    }
+
+    .header {
+        padding: 5px;
+        background-color: peachpuff;
+    }
+
+    h1{
+        font-family: "serif";
+        text-align: center;
+    }
+
+    .container {
+        padding: 8px;
+    }
+
+    .param {
+        margin-top: 10px;
+    }
+
+    .param.x {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .param.y {
+        display: flex;
+        vertical-align: center;
+        justify-self: center;
+    }
+
+    select {
+        width: 50px;
+    }
+
+    .param.r {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+    }
+
+    .graphic {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+    }
+
+    #r-buttons {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    .r-button {
+        height: 30px;
+        width: 35px;
+        margin: 5px;
+    }
+
+    .submit-btn {
+        width: 200px;
+        height: 64px;
+        justify-self: center;
+    }
+
+    #errors {
+        list-style-type: none;
+        text-align: center;
+    }
+
+    #result-table {
+        width: 800px;
+        text-align: center;
+        justify-self: center;
+        border-collapse: collapse;
+        color: ghostwhite;
+    }
+
+    tr {
+        background-color: royalblue;
+    }
+
+    tr.hit-no {
+        font-style: italic;
+        color: black;
+        background-color: indianred;
+    }
+
+    tr.hit-yes {
+        font-style: italic;
+        color: initial;
+        background-color: lightgreen;
+    }
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <h1>Lab. work №1<br>Variant №: 1223<br>Ildus Erbaev P32131</h1>
+</div>
+
+<div class="param x">
+    <label for="x-input">X: </label>
+    <input id="x-input" type="text" name="x_val" maxlength="10" autocomplete="off" placeholder="(-5; 3)">
+</div>
+
+<div class="param y">
+    <label for="y">Y: </label>
+    <select id="number" name="number">
+        <option value="-5">-5</option>
+        <option value="-4">-4</option>
+        <option value="-3">-3</option>
+        <option value="-2">-2</option>
+        <option value="-1">-1</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+</div>
+
+<div class="param r">
+    <label for="r">R: </label>
+    <input class="r-button" type="button" value="1" onclick="chooseR(this)">
+    <input class="r-button" type="button" value="1.5" onclick="chooseR(this)">
+    <input class="r-button" type="button" value="2" onclick="chooseR(this)">
+    <input class="r-button" type="button" value="2.5" onclick="chooseR(this)">
+    <input class="r-button" type="button" value="3" onclick="chooseR(this)">
+</div>
+
+<div class="graphic"><img src="pics/graphic.jpg" alt="График"></div>
+
+<input id="checkBtn" class="submit-btn" type="submit" onclick="submit()" value="Проверить">
+
+<ul id="errors" style="list-style-type: none"></ul>
+
+<table id="result-table">
+    <tr class="table-header">
+        <th class="coords-col">X</th>
+        <th class="coords-col">Y</th>
+        <th class="coords-col">R</th>
+        <th class="time-col">Время запроса</th>
+        <th class="time-col">Время исполнения</th>
+        <th class="hitres-col">Попадание</th>
+    </tr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
