@@ -35,9 +35,9 @@ function generateTableWithRows($wholeTable, $results) {
         <th class="coords-col">X</th>
         <th class="coords-col">Y</th>
         <th class="coords-col">R</th>
-        <th class="time-col">Время запроса</th>
-        <th class="time-col">Время исполнения</th>
-        <th class="hitres-col">Попадание</th>
+        <th class="time-col">Request time</th>
+        <th class="time-col">Execution time</th>
+        <th class="hitres-col">Hit</th>
     </tr>': '';
 
     foreach ($results as $elem)
@@ -48,7 +48,7 @@ function generateTableWithRows($wholeTable, $results) {
 }
 
 function generateRow($elem) {
-    $isHit = $elem['isHit'] ? 'Да': 'Нет';
+    $isHit = $elem['isHit'] ? 'Yes': 'No';
     $elemHtml = $elem["isHit"]? '<tr class="hit-yes">' : '<tr class="hit-no">';
     $elemHtml .= '<td>' . $elem['x'] . '</td>';
     $elemHtml .= '<td>' . $elem['y'] . '</td>';

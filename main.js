@@ -35,7 +35,7 @@ function generateRowFromElem(elem) {
     newRow += '<td>' + elem.r + '</td>';
     newRow += '<td>' + elem.currentTime + '</td>';
     newRow += '<td>' + elem.execTime + '</td>';
-    newRow += '<td>' + (elem.isHit ? 'Да' : 'Нет') + '</td>';
+    newRow += '<td>' + (elem.isHit ? 'Yes' : 'No') + '</td>';
 
     return newRow;
 }
@@ -43,15 +43,15 @@ function generateRowFromElem(elem) {
 function validateX() {
     x = document.querySelector("input[id=x-input]").value.replace(",", ".");
     if (x == undefined) {
-        showError("Ошибка: Введите X");
+        showError("Error: Type X!");
         return false;
     }
     if (!isNumeric(x)) {
-        showError("Ошибка: X не является числом");
+        showError("Error: X is not numeric!");
         return false;
     }
     if (!((x > -5) && (x < 3))) {
-        showError("Ошибка: X не входит в область допустимых значений");
+        showError("Error: X does not fit in area of allowable values!");
         return false;
     }
     return true;
@@ -61,7 +61,7 @@ function validateR() {
     if (r)
         return true;
 
-    showError("Ошибка: Выберите R");
+    showError("Error: Choose R!");
     return false;
 }
 
