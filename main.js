@@ -1,5 +1,4 @@
 let x, y, r;
-const dataType = 'html';
 
 function chooseR(element) {
     r = element.value;
@@ -11,6 +10,9 @@ function chooseR(element) {
 
 function submit() {
     $('#errors').empty();
+    $('tr.hit-no').empty();
+    $('tr.hit-yes').empty();
+
     y = document.querySelector("select[id=number]").value;
     if (validateX() & validateR()) {
         $.get("main.php", {
@@ -18,26 +20,11 @@ function submit() {
             'y': y,
             'r': r,
             'timezone': new Date().getTimezoneOffset(),
-            'wholeTable': false,
-            'dataType': dataType
+            'wholeTable': false
         }).done(function (data) {
-            if (dataType === 'html') {
-                $('#result-table tr:first').after(data);
-            }
+            $('#result-table tr:first').after(data);
         });
     }
-}
-
-function generateRowFromElem(elem) {
-    let newRow = elem.isHit ? '<tr class="hit-yes">' : '<tr class="hit-no">';
-    newRow += '<td>' + elem.x + '</td>';
-    newRow += '<td>' + elem.y + '</td>';
-    newRow += '<td>' + elem.r + '</td>';
-    newRow += '<td>' + elem.currentTime + '</td>';
-    newRow += '<td>' + elem.execTime + '</td>';
-    newRow += '<td>' + (elem.isHit ? 'Yes' : 'No') + '</td>';
-
-    return newRow;
 }
 
 function validateX() {

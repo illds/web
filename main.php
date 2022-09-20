@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 error_reporting(E_ERROR | E_PARSE);
 
 function checkHit($xVal, $yVal, $rVal)
@@ -7,6 +9,10 @@ function checkHit($xVal, $yVal, $rVal)
     return ($xVal >= 0 && $yVal <= 0 && $rVal >= $xVal - $yVal)
         || ($xVal >= 0 && $yVal >= 0 && $xVal <= $rVal && $yVal <= $rVal / 2)
         || $xVal <= 0 && $yVal >= 0 && pow($xVal, 2) + pow($yVal, 2) <= pow($rVal / 2, 2);
+}
+
+function validate($xVal, $yVal, $rVal){
+    return is_numeric($xVal) && is_numeric($yVal) && is_numeric($rVal);
 }
 
 function getResultArray($xVal, $yVal, $rVal, $timezone) {
@@ -61,20 +67,26 @@ function generateRow($elem) {
     return $elemHtml;
 }
 
-
 $xVal = explode(",", $_GET['x']);
 $yVal = $_GET['y'];
 $rVal = $_GET['r'];
-$dataType = $_GET['dataType'];
 $wholeTable = $_GET['wholeTable'];
 
+if (!validate($xVal, $yVal, $rVal)){
+    echo "Error";
+}
 if (!isset($wholeTable)) $wholeTable = true;
 
 $timezone = $_GET['timezone'];
 
 $results = getResultArray($xVal, $yVal, $rVal, $timezone);
 
-if ($dataType == 'json')
-    echo toJSON($results);
-else if($dataType == 'html')
-    echo generateTableWithRows($wholeTable, $results);
+if (!isset($_SESSION['results'])) {
+    $_SESSION['results'] = array($results);
+} else {
+    array_push($_SESSION['results'], $results);
+}
+
+foreach ($_SESSION['results'] as $element) echo generateTableWithRows($wholeTable, $element);
+
+?>
