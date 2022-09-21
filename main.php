@@ -36,20 +36,30 @@ function getResultArray($xVal, $yVal, $rVal, $timezone) {
     return $results;
 }
 
-function generateTableWithRows($wholeTable, $results) {
-    $html = $wholeTable == 'true'? '<table id="result-table"><tr class="table-header">
-        <th class="coords-col">X</th>
-        <th class="coords-col">Y</th>
-        <th class="coords-col">R</th>
-        <th class="time-col">Request time</th>
-        <th class="time-col">Execution time</th>
-        <th class="hitres-col">Hit</th>
-    </tr>': '';
-
+function generateTableWithRows($results) {
+//    $html = $wholeTable == 'true'? '<table id="result-table"><tr class="table-header">
+//        <th class="coords-col">X</th>
+//        <th class="coords-col">Y</th>
+//        <th class="coords-col">R</th>
+//        <th class="time-col">Request time</th>
+//        <th class="time-col">Execution time</th>
+//        <th class="hitres-col">Hit</th>
+//    </tr>': '';
+//    $html = '<table id="result-table"><tr class="table-header">
+//        <th class="coords-col">X</th>
+//        <th class="coords-col">Y</th>
+//        <th class="coords-col">R</th>
+//        <th class="time-col">Request time</th>
+//        <th class="time-col">Execution time</th>
+//        <th class="hitres-col">Hit</th>
+//    </tr>';
+    $html = '';
     foreach ($results as $elem)
         $html .= generateRow($elem);
 
-    if ($wholeTable == 'true') $html .= '</table>';
+// if ($wholeTable == 'true')
+//    $html .= '</table>';
+
     return $html;
 }
 
@@ -70,23 +80,28 @@ function generateRow($elem) {
 $xVal = explode(",", $_GET['x']);
 $yVal = $_GET['y'];
 $rVal = $_GET['r'];
-$wholeTable = $_GET['wholeTable'];
+$reload = $_GET['reload'];
 
-if (!validate($xVal, $yVal, $rVal)){
-    echo "Error";
-}
-if (!isset($wholeTable)) $wholeTable = true;
+//if (!validate($xVal, $yVal, $rVal)){
+//    echo "Error";
+//}
 
-$timezone = $_GET['timezone'];
-
-$results = getResultArray($xVal, $yVal, $rVal, $timezone);
-
-if (!isset($_SESSION['results'])) {
-    $_SESSION['results'] = array($results);
+if ($rVal == 0) {
+    if (isset($_SESSION['results'])) {
+        foreach ($_SESSION['results'] as $element) echo generateTableWithRows($element);
+    }
 } else {
-    array_push($_SESSION['results'], $results);
-}
+    $timezone = $_GET['timezone'];
 
-foreach ($_SESSION['results'] as $element) echo generateTableWithRows($wholeTable, $element);
+    $results = getResultArray($xVal, $yVal, $rVal, $timezone);
+
+    if (!isset($_SESSION['results'])) {
+        $_SESSION['results'] = array($results);
+    } else {
+        array_push($_SESSION['results'], $results);
+    }
+
+    foreach ($_SESSION['results'] as $element) echo generateTableWithRows($element);
+}
 
 ?>

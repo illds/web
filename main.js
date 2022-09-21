@@ -1,5 +1,21 @@
 let x, y, r;
 
+$(document).ready(function(){
+    // $('#errors').empty();
+    // $('tr.hit-no').empty();
+    // $('tr.hit-yes').empty();
+
+    $.get("main.php", {
+            'x': 0,
+            'y': 0,
+            'r': 0,
+            'timezone': new Date().getTimezoneOffset(),
+            'reload': true
+        }).done(function (data) {
+            $('#result-table tr:first').after(data);
+        });
+});
+
 function chooseR(element) {
     r = element.value;
     [...document.getElementsByClassName("r-button")].forEach(function (btn) {
@@ -20,7 +36,7 @@ function submit() {
             'y': y,
             'r': r,
             'timezone': new Date().getTimezoneOffset(),
-            'wholeTable': false
+            'reload': false
         }).done(function (data) {
             $('#result-table tr:first').after(data);
         });
