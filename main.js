@@ -1,16 +1,12 @@
 let x, y, r;
 
 $(document).ready(function(){
-    // $('#errors').empty();
-    // $('tr.hit-no').empty();
-    // $('tr.hit-yes').empty();
-
     $.get("main.php", {
             'x': 0,
             'y': 0,
             'r': 0,
             'timezone': new Date().getTimezoneOffset(),
-            'reload': true
+            'state': 1
         }).done(function (data) {
             $('#result-table tr:first').after(data);
         });
@@ -36,11 +32,35 @@ function submit() {
             'y': y,
             'r': r,
             'timezone': new Date().getTimezoneOffset(),
-            'reload': false
+            'state': 0
+        }).done(function (data) {
+            $('#result-table tr:first').after(data);
+        });
+    } else {
+        $.get("main.php", {
+            'x': 0,
+            'y': 0,
+            'r': 0,
+            'timezone': new Date().getTimezoneOffset(),
+            'state': 1
         }).done(function (data) {
             $('#result-table tr:first').after(data);
         });
     }
+}
+
+function clearTable() {
+    $('#errors').empty();
+    $('tr.hit-no').empty();
+    $('tr.hit-yes').empty();
+
+    $.get("main.php", {
+        'x': 0,
+        'y': 0,
+        'r': 0,
+        'timezone': new Date().getTimezoneOffset(),
+        'state': 2
+    });
 }
 
 function validateX() {

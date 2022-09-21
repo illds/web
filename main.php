@@ -4,8 +4,7 @@ session_start();
 
 error_reporting(E_ERROR | E_PARSE);
 
-function checkHit($xVal, $yVal, $rVal)
-{
+function checkHit($xVal, $yVal, $rVal){
     return ($xVal >= 0 && $yVal <= 0 && $rVal >= $xVal - $yVal)
         || ($xVal >= 0 && $yVal >= 0 && $xVal <= $rVal && $yVal <= $rVal / 2)
         || $xVal <= 0 && $yVal >= 0 && pow($xVal, 2) + pow($yVal, 2) <= pow($rVal / 2, 2);
@@ -77,19 +76,25 @@ function generateRow($elem) {
     return $elemHtml;
 }
 
+function clear(){
+    $_SESSION['results'] = array();
+}
+
 $xVal = explode(",", $_GET['x']);
 $yVal = $_GET['y'];
 $rVal = $_GET['r'];
-$reload = $_GET['reload'];
+$state = $_GET['state'];
 
 //if (!validate($xVal, $yVal, $rVal)){
 //    echo "Error";
 //}
 
-if ($rVal == 0) {
+if ($state == 1) {
     if (isset($_SESSION['results'])) {
         foreach ($_SESSION['results'] as $element) echo generateTableWithRows($element);
     }
+} else if ($state == 2){
+    clear();
 } else {
     $timezone = $_GET['timezone'];
 

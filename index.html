@@ -10,14 +10,17 @@
     body {
         margin: 0;
         display: grid;
-        background: whitesmoke;
-        /*background: url("pics/back.jpg") no-repeat;*/
-        /*background-size: 100%;*/
+        /*background: whitesmoke;*/
+        background: url("pics/background.jpg") no-repeat;
+        background-size: 100%;
     }
 
     .header {
         padding: 5px;
-        background-color: peachpuff;
+        /*background-color: #e8d4d6;*/
+        background-color: #e4c5a6;
+        border-color: antiquewhite;
+        border-style: inherit;
     }
 
     h1{
@@ -74,9 +77,18 @@
     }
 
     .submit-btn {
+        margin: 10px;
         width: 200px;
-        height: 64px;
+        height: 50px;
         justify-self: center;
+        display: inline;
+    }
+
+    .clear-btn {
+        width: 200px;
+        height: 50px;
+        justify-self: center;
+        display: inline;
     }
 
     #errors {
@@ -147,6 +159,8 @@
 <div class="graphic"><img src="pics/graphic.jpg" alt="График"></div>
 
 <input id="checkBtn" class="submit-btn" type="submit" onclick="submit()" value="Check">
+<input id="clearBtn" class="clear-btn" type="submit" onclick="clearTable()" value="Clear">
+
 
 <ul id="errors" style="list-style-type: none"></ul>
 
