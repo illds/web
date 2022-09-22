@@ -2,10 +2,6 @@ let x, y, r;
 
 $(document).ready(function(){
     $.get("main.php", {
-            'x': 0,
-            'y': 0,
-            'r': 0,
-            'timezone': new Date().getTimezoneOffset(),
             'state': 1
         }).done(function (data) {
             $('#result-table tr:first').after(data);
@@ -38,10 +34,6 @@ function submit() {
         });
     } else {
         $.get("main.php", {
-            'x': 0,
-            'y': 0,
-            'r': 0,
-            'timezone': new Date().getTimezoneOffset(),
             'state': 1
         }).done(function (data) {
             $('#result-table tr:first').after(data);
