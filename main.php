@@ -13,7 +13,9 @@ function checkHit($xVal, $yVal, $rVal)
 
 function validate($xVal, $yVal, $rVal, $timezone)
 {
-    return isset($xVal) && isset($xVal) && isset($xVal) && isset($timezone) && is_numeric($xVal) && is_numeric($yVal) && is_numeric($rVal);
+    return isset($xVal) && isset($xVal) && isset($xVal) && isset($timezone)
+        && is_numeric($xVal) && is_numeric($yVal) && is_numeric($rVal) && is_numeric($timezone)
+        && $xVal > -5 && $xVal < 3 && $yVal >= -5 && $yVal <= 3 && $rVal >= 1 && $rVal <= 3;
 }
 
 function getResultArray($xVal, $yVal, $rVal, $timezone)

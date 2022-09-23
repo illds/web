@@ -1,11 +1,11 @@
 let x, y, r;
 
-$(document).ready(function(){
+$(document).ready(function () {
     $.get("main.php", {
-            'state': 1
-        }).done(function (data) {
-            $('#result-table tr:first').after(data);
-        });
+        'state': 1
+    }).done(function (data) {
+        $('#result-table tr:first').after(data);
+    });
 });
 
 function chooseR(element) {
@@ -47,10 +47,6 @@ function clearTable() {
     $('tr.hit-yes').empty();
 
     $.get("main.php", {
-        'x': 0,
-        'y': 0,
-        'r': 0,
-        'timezone': new Date().getTimezoneOffset(),
         'state': 2
     });
 }
@@ -66,7 +62,7 @@ function validateX() {
         return false;
     }
     if (!((x > -5) && (x < 3))) {
-        showError("Error: X does not fit in area of allowable values!");
+        showError("Error: X does not fit in range of allowable values!");
         return false;
     }
     return true;
